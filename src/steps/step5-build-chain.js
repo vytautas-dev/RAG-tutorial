@@ -11,17 +11,19 @@ import { createRetriever } from './step4-create-retriever.js';
 import { combineDocuments } from '../utils/combineDocuments.js';
 import { logger } from '../utils/logger.js';
 
-async function buildRAGChain() {
-  logger.info('Step 5: Building RAG Chain');
+const CONTEXT = 'RAG_CHAIN_SETUP';
 
-  logger.info('1: Initializing components');
+async function buildRAGChain() {
+  logger.separator();
+  logger.info(CONTEXT, 'Step 5: Building RAG Chain');
+  logger.info(CONTEXT, '1: Initializing components');
 
   try {
     // LM and retriever initialization
     const llm = await setupLLM();
     const retriever = await createRetriever();
 
-    logger.info('2: Creating prompt templates');
+    logger.info(CONTEXT, '2: Creating prompt templates');
 
     // Template for generating standalone questions
     const standaloneQuestionTemplate = `
@@ -35,7 +37,7 @@ Standalone question:`;
       standaloneQuestionTemplate
     );
 
-    logger.info('Prompt for standalone question created');
+    logger.info(CONTEXT, 'Prompt for standalone question created');
     // Template for generating answers based on context
     const answerTemplate = `
 You are a helpful assistant who answers questions about Polysight based on the provided context.
@@ -57,8 +59,8 @@ Answer:`;
 
     const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
-    logger.success('Prompt for generating answers created');
-    logger.info('3: Creating sub-chains');
+    logger.success(CONTEXT, 'Prompt for generating answers created');
+    logger.info(CONTEXT, '3: Creating sub-chains');
 
     // Chain for generating standalone questions
     const standaloneQuestionChain = RunnableSequence.from([
@@ -67,12 +69,12 @@ Answer:`;
       new StringOutputParser(),
     ]);
 
-    logger.success('Standalone question chain created');
+    logger.success(CONTEXT, 'Standalone question chain created');
 
     // Chain for retrieving context and preparing for answer generation
     const retrieverChain = RunnableSequence.from([
       (prevResult) => {
-        logger.info(
+        logger.info(CONTEXT,
           'Retrieving context for question:',
           prevResult.standalone_question
         );
@@ -82,7 +84,7 @@ Answer:`;
       combineDocuments,
     ]);
 
-    logger.success('Retriever chain created');
+    logger.success(CONTEXT, 'Retriever chain created');
 
     // Chain for generating answers
     const answerChain = RunnableSequence.from([
@@ -91,9 +93,9 @@ Answer:`;
       new StringOutputParser(),
     ]);
 
-    logger.success('Answer chain created');
+    logger.success(CONTEXT, 'Answer chain created');
 
-    logger.info('Step 4: Combining all components into the main RAG chain');
+    logger.info(CONTEXT, 'Step 4: Combining all components into the main RAG chain');
 
     // Main RAG chain
     const ragChain = RunnableSequence.from([
@@ -112,23 +114,23 @@ Answer:`;
       answerChain,
     ]);
 
-    logger.success('RAG chain created successfully!');
-
-    logger.info('Step 5: Testing the complete pipeline');
+    logger.success(CONTEXT, 'RAG chain created successfully!');
+    logger.info(CONTEXT, 'Step 5: Testing the complete pipeline');
 
     // Test the RAG chain with a sample question
-
     const testQuestion =
       'What are the minimum system requirements for Polysight?';
-    logger.info('Test question:', testQuestion);
+    logger.info(CONTEXT, 'Test question:', testQuestion);
 
-    logger.info('Sending test question to RAG chain...');
+    logger.info(CONTEXT, 'Sending test question to RAG chain...');
     const response = await ragChain.invoke({ question: testQuestion });
 
-    logger.info('Test response received:', response);
+    logger.info(CONTEXT, 'Test response received:', response);
+    logger.separator();
     return ragChain;
   } catch (error) {
-    logger.error('Error during RAG chain creation:', error);
+    logger.error(CONTEXT, 'Error during RAG chain creation:', error);
+    logger.separator();
     throw error;
   }
 }

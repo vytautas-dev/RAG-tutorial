@@ -5,20 +5,23 @@ import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { logger } from '../utils/logger.js';
 import { config } from '../utils/config.js';
 
+const CONTEXT = 'DATA_PREPARATION';
+
 async function prepareData() {
-  console.log('Step 2: Data Preparation');
-  console.log('1: Loading data from text file...');
+  logger.separator();
+  logger.info(CONTEXT, 'Step 2: Data Preparation');
+  logger.info(CONTEXT, '1: Loading data from text file...');
 
   try {
     const rawData = await fs.readFile(config.dataPath, 'utf-8');
 
-    logger.success(' Data loaded successfully', {
+    logger.success(CONTEXT, ' Data loaded successfully', {
       filePath: config.dataPath,
       fileSize: `${rawData.length} characters`,
       preview: rawData.substring(0, 100) + '...',
     });
 
-    logger.info('2: Splitting text into chunks');
+    logger.info(CONTEXT,'2: Splitting text into chunks');
 
     // Text splitter configuration
     const textSplitter = new RecursiveCharacterTextSplitter({
@@ -27,7 +30,7 @@ async function prepareData() {
       separators: ['\n\n', '\n', ' ', ''], // Preferred separators
     });
 
-    logger.info('Text splitter configuration:', {
+    logger.info(CONTEXT, 'Text splitter configuration:', {
       chunkSize: 1000,
       chunkOverlap: 200,
       separators: ['\n\n', '\n', ' ', ''],
@@ -36,17 +39,17 @@ async function prepareData() {
     // Chunking the text
     const documents = await textSplitter.createDocuments([rawData]);
 
-    logger.info(`Text split into ${documents.length} chunks`);
+    logger.info(CONTEXT, `Text split into ${documents.length} chunks`);
 
     // Show a preview of the first few chunks
     documents.forEach((doc, index) => {
-      logger.info(`Fragment ${index + 1}:`, {
+      logger.info(CONTEXT,`Fragment ${index + 1}:`, {
         length: doc.pageContent.length,
         preview: doc.pageContent.substring(0, 150) + '...',
       });
     });
 
-    logger.info('3: Analyzing chunk quality');
+    logger.info(CONTEXT,'3: Analyzing chunk quality');
 
     const stats = {
       totalDocuments: documents.length,
@@ -58,10 +61,12 @@ async function prepareData() {
       maxLength: Math.max(...documents.map((doc) => doc.pageContent.length)),
     };
 
-    logger.info('Chunk statistics:', stats);
+    logger.info(CONTEXT,'Chunk statistics:', stats);
+    logger.separator();
     return documents;
   } catch (error) {
-    logger.error('Error during data preparation:', error);
+    logger.error(CONTEXT,'Error during data preparation:', error);
+    logger.separator();
     throw error;
   }
 }
