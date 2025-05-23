@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js",
-    "setup-data": "node scripts/setup-data.js"
+    "setup-data": "node scripts/setup-data.js",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +24,8 @@
     "dotenv": "^16.5.0",
     "inquirer": "^12.6.1",
     "langchain": "^0.3.26"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
   }
 }

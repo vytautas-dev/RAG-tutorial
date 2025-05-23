@@ -14,25 +14,25 @@ Retrieval-Augmented Generation (RAG) combines information retrieval with languag
 
 ```
 rag-tutorial/
-├── README.md                 # This file  
-├── docker-compose.yml        # Qdrant configuration  
-├── .env.example             # Example environment variables  
-├── .env                     # Your API keys (do not commit!)  
-├── package.json             # Dependencies  
-├── data/                    # Data for indexing  
-│   └── knowledge-base.txt   # Knowledge base  
+├── README.md                 # This file
+├── docker-compose.yml        # Qdrant configuration
+├── .env.example             # Example environment variables
+├── .env                     # Your API keys (do not commit!)
+├── package.json             # Dependencies
+├── data/                    # Data for indexing
+│   └── knowledge-base.txt   # Knowledge base
 ├── src/
-│   ├── app.js              # Main application  
-│   ├── steps/              # Tutorial steps  
-│   │   ├── step1-setup-llm.js  
-│   │   ├── step2-prepare-data.js  
-│   │   ├── step3-setup-vectordb.js  
-│   │   ├── step4-create-retriever.js  
-│   │   └── step5-build-chain.js  
+│   ├── app.js              # Main application
+│   ├── steps/              # Tutorial steps
+│   │   ├── step1-setup-llm.js
+│   │   ├── step2-prepare-data.js
+│   │   ├── step3-setup-vectordb.js
+│   │   ├── step4-create-retriever.js
+│   │   └── step5-build-chain.js
 │   └── utils/
-│       ├── logger.js       # Logging system  
-│       ├── combineDocuments.js  
-│       └── config.js       # Configuration  
+│       ├── logger.js       # Logging system
+│       ├── combineDocuments.js
+│       └── config.js       # Configuration
 └── scripts/
     └── setup-data.js       # Script for loading data
 ```
@@ -46,6 +46,7 @@ rag-tutorial/
 ## Installation and Setup
 
 ### 1. Clone and install dependencies
+
 ```bash
 git clone <repo-url>
 cd rag-tutorial
@@ -53,22 +54,26 @@ npm install
 ```
 
 ### 2. Set up environment variables
+
 ```bash
 cp .env.example .env
 # Edit .env and add your Google Gemini API key
 ```
 
 ### 3. Start the Qdrant vector database
+
 ```bash
 docker-compose up -d
 ```
 
 ### 4. Prepare the data
+
 ```bash
 npm run setup-data
 ```
 
 ### 5. Run the application
+
 ```bash
 npm start
 ```
@@ -93,6 +98,7 @@ Combine all components into a functional RAG pipeline.
 ## Usage
 
 Once the application starts, it will prompt you for a question in the terminal:
+
 ```
 ? Ask a question: What are the technical requirements to run Polysight?
 ```
@@ -100,17 +106,17 @@ Once the application starts, it will prompt you for a question in the terminal:
 ## Architecture
 
 ```
-User Question  
-      ↓  
-Transform into a standalone question  
-      ↓  
-Search in vector database (Qdrant)  
-      ↓  
-Combine retrieved documents  
-      ↓  
-Generate answer using LLM  
-      ↓  
-Return response to user  
+User Question
+      ↓
+Transform into a standalone question
+      ↓
+Search in vector database (Qdrant)
+      ↓
+Combine retrieved documents
+      ↓
+Generate answer using LLM
+      ↓
+Return response to user
 ```
 
 ## Technologies
@@ -131,4 +137,4 @@ After completing the tutorial, you can:
 - Add more data sources
 - Experiment with different LLMs
 - Implement a web interface
-- Add response caching  
+- Add response caching
