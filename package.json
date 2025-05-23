@@ -1,0 +1,27 @@
+{
+  "name": "langchain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js",
+    "setup-data": "node scripts/setup-data.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@langchain/community": "^0.3.43",
+    "@langchain/core": "^0.3.56",
+    "@langchain/google-genai": "^0.2.9",
+    "@langchain/openai": "^0.5.10",
+    "@langchain/qdrant": "^0.1.2",
+    "@qdrant/js-client-rest": "^1.14.1",
+    "@supabase/supabase-js": "^2.49.4",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "inquirer": "^12.6.1",
+    "langchain": "^0.3.26"
+  }
+}

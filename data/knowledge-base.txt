@@ -1,0 +1,73 @@
+SUPPORTED OPERATING SYSTEMS:
+
+Windows 10 or newer
+
+macOS 10.14 or newer
+
+Linux (Ubuntu 18.04+, Fedora 30+)
+
+Chrome OS
+
+iOS 12+ (for the mobile app)
+
+Android 8.0+ (for the mobile app)
+
+ACCESSIBILITY FEATURES:
+Polysight supports accessibility tools such as screen readers and keyboard navigation.
+
+COURSES & TECHNOLOGIES:
+Polysight offers courses in:
+
+JavaScript (beginner and advanced)
+
+React and React Native
+
+HTML and CSS
+
+Node.js and Express
+
+Python
+
+UI/UX Design
+
+Responsive Web Design
+
+INTERACTIVE SCREENCASTS:
+Polysight's unique feature is interactive screencasts that allow you to:
+
+Pause the video and edit code in real time
+
+Experiment with the instructor’s code
+
+Copy code snippets directly from the video
+
+TECHNICAL SUPPORT:
+For technical issues, contact: help@polysight.com
+
+PRICING & PLANS:
+
+Free Plan: Access to selected beginner courses
+
+Polysight Pro ($19/month): Full access to all courses and features
+
+Student and team discounts available
+
+COMMUNITY:
+An active community on Discord and the forum where you can:
+
+Ask questions
+
+Share projects
+
+Find study partners
+
+Get feedback from fellow learners
+
+CERTIFICATES:
+Upon course completion, you receive certificates you can add to your LinkedIn and resume.
+
+MOBILE APPS:
+Available on iOS and Android with progress sync across devices.
+
+OFFLINE MODE:
+Some courses can be downloaded for offline viewing (mobile apps only).
