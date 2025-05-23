@@ -3,16 +3,17 @@
 import fs from 'fs/promises';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { logger } from '../utils/logger.js';
+import { config } from '../utils/config.js';
 
 async function prepareData() {
   console.log('Step 2: Data Preparation');
   console.log('1: Loading data from text file...');
 
   try {
-    const rawData = await fs.readFile('./data/knowledge-base.txt', 'utf-8');
+    const rawData = await fs.readFile(config.dataPath, 'utf-8');
 
     logger.success(' Data loaded successfully', {
-      filePath: './data/knowledge-base.txt',
+      filePath: config.dataPath,
       fileSize: `${rawData.length} characters`,
       preview: rawData.substring(0, 100) + '...',
     });
